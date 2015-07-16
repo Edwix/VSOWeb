@@ -13,7 +13,11 @@ $(function () {
             $varTableBody.empty();
 
             $.each(listDObs, function () {
-                
+                $varTableBody.append(
+                    "<tr><td>" + this.PathName + "</td>" +
+                    "<td>" + this.DValueObs + "</td>"  +
+                    "<td>" + this.IsForced +  "</td></tr>"
+                    );
             });
 
         });
