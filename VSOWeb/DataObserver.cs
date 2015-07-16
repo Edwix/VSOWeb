@@ -59,8 +59,8 @@ namespace VSOWeb
 
         public string ValueObs
         {
-            get { return _val; }
-            set { _val = value;  }
+            get;
+            set;
         }
 
         public int DValueObs

@@ -51,6 +51,31 @@ namespace VSOWeb
             };
 
             _timer = new Timer(UpdateDataObservers, null, _updateInterval, _updateInterval);
+
+
+            ///=======================================================================================================
+            ///Il faut charger les valeurs au moins une fois sinon la librairie n'arrive pas a récupérer le type
+            ///Et donc il n'arrive pas à mettre les valeurs à jours   :/
+            ///=======================================================================================================
+                foreach (DataObserver rowObserver in _listDataObs)
+                {
+
+
+                    DataObserver dObs = readValue3(rowObserver);
+
+                    InjectionVariableStatus status = new InjectionVariableStatus();
+                    vc.getInjectionStatus(rowObserver.PathName, status);
+
+                    if (status.state == InjectionStates.InjectionStates_IsSet)
+                    {
+                        rowObserver.IsForced = true;
+                    }
+                    else
+                    {
+                        rowObserver.IsForced = false;
+                    }
+                }
+            ///=======================================================================================================
         }
 
         public static VariableObserver Instance
@@ -84,7 +109,9 @@ namespace VSOWeb
 
                     foreach (DataObserver rowObserver in _listDataObs)
                     {
-                        /*DataObserver dObs = readValue3(rowObserver);
+                       
+
+                        DataObserver dObs = readValue3(rowObserver);
 
                         InjectionVariableStatus status = new InjectionVariableStatus();
                         vc.getInjectionStatus(rowObserver.PathName, status);
@@ -96,9 +123,7 @@ namespace VSOWeb
                         else
                         {
                             rowObserver.IsForced = false;
-                        }*/
-                        Random r = new Random();
-                        rowObserver.DValueObs = r.Next(0, 255);
+                        }
 
                         BroadcastDataObserver(rowObserver);
                     }
@@ -122,8 +147,8 @@ namespace VSOWeb
             int typeVS = -1;
             long oldTimeStamp = oldDataObs.Timestamp;
             long timeStamp = 0;
-            string value = "";
-            //vc = Vs.getVariableController();
+            string value = "-10";
+            vc = Vs.getVariableController();
             vc.getType(completeVariable, out typeVS);
             Console.WriteLine("readValue : " + completeVariable + " TYPE " + typeVS + " VC " + importOk);
 

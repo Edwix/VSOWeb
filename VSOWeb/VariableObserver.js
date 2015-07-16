@@ -10,7 +10,7 @@ $(function () {
     function rowObserver(dObs)
     {
         return "<tr pathName=" + dObs.DataId + "><td>" + dObs.PathName + "</td>" +
-                    "<td>" + dObs.DValueObs + "</td>" +
+                    "<td>" + dObs.ValueObs + "</td>" +
                     "<td>" + dObs.IsForced + "</td></tr>";
 
     }
