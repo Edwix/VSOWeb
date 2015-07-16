@@ -46,7 +46,6 @@ namespace VSOWeb
             vc = Vs.getVariableController();
 
             _listDataObs = new List<DataObserver>{
-                new DataObserver { DataId=1, PathName = "CT1_LV/FPGA/LiveBit", ValueObs="" },
                 new DataObserver { DataId=2, PathName = "CODES/CT1_M1_PNT/LiveBit", ValueObs="" }
             };
 

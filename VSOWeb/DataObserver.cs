@@ -89,8 +89,8 @@ namespace VSOWeb
 
         public long Timestamp
         {
-            get { return _ts; }
-            set { _ts = value;  }
+            get;
+            set;
         }
 
         public bool ValueHasChanged
