@@ -7,16 +7,23 @@ $(function () {
         $varTableBody = $varTable.find('tbody');
 
 
+    function rowObserver(dObs)
+    {
+        return "<tr pathName=" + dObs.DataId + "><td>" + dObs.PathName + "</td>" +
+                    "<td>" + dObs.DValueObs + "</td>" +
+                    "<td>" + dObs.IsForced + "</td></tr>";
+
+    }
+
     function init()
     {
+        ///On récupère toutes les variables VS définis dans la Classe VariableObserver.cs
         ticker.server.getAllDataObserver().done(function (listDObs) {
             $varTableBody.empty();
 
             $.each(listDObs, function () {
                 $varTableBody.append(
-                    "<tr><td>" + this.PathName + "</td>" +
-                    "<td>" + this.DValueObs + "</td>"  +
-                    "<td>" + this.IsForced +  "</td></tr>"
+                        rowObserver(this)
                     );
             });
 
@@ -24,8 +31,11 @@ $(function () {
     }
 
     // Add a client-side hub method that the server will call
+    //Cette fonction est appelé dès qu'il y a un changement de variable
     ticker.client.updateDataObserver = function (dobs) {
 
+
+        $varTableBody.find('tr[pathName=' + dobs.DataId + ']').replaceWith(rowObserver(dobs));
 
         
     }

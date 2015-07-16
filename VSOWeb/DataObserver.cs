@@ -33,6 +33,12 @@ namespace VSOWeb
             _isForced = false;
         }
 
+        public int DataId
+        {
+            get;
+            set;
+        }
+
         public string PathName
         {
             get { return _pathName; }
